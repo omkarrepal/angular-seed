@@ -1,0 +1,10 @@
+<h4>User List</h4>
+<div *ngFor="let user of users| paginate: { itemsPerPage: 2, currentPage: p }">
+  <b>{{user.id}}</b> {{user.name}} - {{user.email}}
+  <button (click)="destroy(user)">Delete</button>
+  <button (click)="user.editable=!user.editable">Edit</button>
+
+  <app-user-edit [user]="user" *ngIf="user.editable" (updateUserEvent)="update($event)"></app-user-edit>
+  
+</div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
